@@ -4,11 +4,11 @@ metadata:
   name: app-of-apps
 spec:
   destination:
-    name: in-cluster
-    namespace: argocd
+    name: https://kubernetes.default.svc
+    namespace: app-of-apps
   source:
     path: apps
-    repoURL: 'https://github.com/morey-tech/argo-cd-app-of-apps-demo'
+    repoURL: 'git@github.com:rockchico/argo-cd-app-of-apps-demo.git'
     targetRevision: HEAD
   project: default
   # syncPolicy:
