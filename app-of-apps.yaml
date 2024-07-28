@@ -4,14 +4,17 @@ metadata:
   name: app-of-apps
 spec:
   destination:
-    name: https://kubernetes.default.svc
+    name: in-cluster
     namespace: app-of-apps
   source:
     path: apps
     repoURL: 'git@github.com:rockchico/argo-cd-app-of-apps-demo.git'
     targetRevision: HEAD
   project: default
-  # syncPolicy:
-  #   automated:
-  #     prune: true
-  #     selfHeal: true
+  syncPolicy:
+    # Para observar modificações no repositório e reaplicar em
+    automated:
+      prune: true # aplica o automatic prunning, exclui automaticamente os recurso que naão estão no git
+      selfHeal: true # corrigi qualquer diferença entre o que está no cluster e o git
+    syncOptions:
+      - CreateNamespace=true # Cria o namespace de destino
